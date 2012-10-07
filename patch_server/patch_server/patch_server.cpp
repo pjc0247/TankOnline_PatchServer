@@ -140,18 +140,18 @@ void SendData(SOCKET sock, char* ct, char* fileName)
 	
 
 	while(1){
-		char buffer[1024];
+		char buffer[BUFSIZE];
 		DWORD dwRead;
 		int sent;
 
-		ReadFile(fp,buffer,1024,&dwRead,NULL);
+		ReadFile(fp,buffer,BUFSIZE,&dwRead,NULL);
 		sent = send(sock,buffer,dwRead,0);
 
 		if(sent == -1){
 			printf("send aborted %s\n", fileName);
 			goto CloseFile;
 		}
-		if(dwRead != 1024)
+		if(dwRead != BUFSIZE)
 			break;
 	}
 
